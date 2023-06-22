@@ -15,3 +15,11 @@ variables:
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'serviceconn_testazdevops'
+    appType: 'webApp'
+    WebAppName: 'webapp-testpipeline'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
